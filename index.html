@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy birthday, Diraaaaaa!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #faf9f7;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 150px 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('/img/hai.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: #fff;
+        }
+        
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #fff;
+            border-radius: 2px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .memories {
+            padding: 80px 0;
+            text-align: center;
+            background-color: #fff;
+        }
+        
+        .memories h2 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .memories p {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: #666;
+        }
+        
+        .memory-items {
+            margin-top: 50px;
+        }
+        
+        .memory-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .memory-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .memory-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .memory-image {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .memory-text {
+            flex: 1;
+            padding: 20px 40px;
+            text-align: left;
+        }
+        
+        .memory-item:nth-child(even) .memory-text {
+            text-align: right;
+        }
+        
+        .memory-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .memory-text p {
+            color: #666;
+            line-height: 1.8;
+            margin: 0 0 15px;
+        }
+        
+        .memory-date {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #888;
+            margin-top: 10px;
+        }
+        
+        .photo-frame {
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.5s ease;
+            height: 350px;
+        }
+        
+        .photo-frame:hover {
+            transform: translateY(-10px);
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .photo-frame:hover img {
+            transform: scale(1.05);
+        }
+        
+        .message {
+            padding: 80px 0;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        
+        .message-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        
+        .message h2 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .message .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-top: 30px;
+        }
+        
+        .wishes {
+            padding: 80px 0;
+            text-align: center;
+            background-color: #fff;
+        }
+        
+        .wishes h2 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .wishes-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .wish-box {
+            flex: 1 1 300px;
+            background: #f9f9f9;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .wish-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .wish-box p {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .wish-box span {
+            font-weight: 500;
+            color: #333;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .surprise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        
+        .surprise-content {
+            text-align: center;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .surprise h2 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .surprise p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .close-surprise {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-surprise:hover {
+            color: #777;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #333;
+            color: #fff;
+        }
+        
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .heart {
+            display: inline-block;
+            color: #f06292;
+            animation: beat 1.5s infinite alternate;
+            transform-origin: center;
+        }
+        
+        @keyframes beat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+        
+        /* Animasi halus */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsivitas */
+        @media screen and (max-width: 992px) {
+            .memory-item, .memory-item:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .memory-text, .memory-item:nth-child(even) .memory-text {
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .photo-frame {
+                height: 300px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 3rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            .message-box {
+                padding: 25px;
+            }
+            
+            .wishes-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Happy birthday</h1>
+        <p>For my lovely pookie, my gf, my future wife.......</p>
+        <a href="#message" class="btn">read message</a>
+    </header>
+    
+    <section class="memories" id="memories">
+        <div class="container">
+            <h2>Our beautiful memories</h2>
+            <p>This is our love journey yang dipenuhi dengan momen-momen istimewa yang tidak akan pernah terlupakan</p>
+            
+            <div class="memory-items">
+                <!-- Kenangan 1 -->
+                <div class="memory-item">
+                    <div class="memory-image">
+                        <div class="photo-frame">
+                            <img src="/img/a.png" alt="Hari Pertama Kita">
+                        </div>
+                    </div>
+                    <div class="memory-text">
+                        <h3>Our first chat</h3>
+                        <p>ahahhahahaha, this is our first chat, pertama kali aku chatan sama diraa, pertama kali kita chat an, pertama kali chat with my future wife omg...
+                             pas itu, keren banget siii, ga nyangka berawal dari chat itu, kita bisa kaya gini sampe sekarang aaaaaaaaaaa.
+                        </p>
+                        <p>dira dengan chat nya yang lucuu, dan aku yang excited juga wkwkwkkw, lucuuuu , dulu masi kaku banget wkwkwkkw.</p>
+                        <span class="memory-date">17 oktober 2024</span>
+                    </div>
+                </div>
+                
+                <!-- Kenangan 2 -->
+                <div class="memory-item">
+                    <div class="memory-image">
+                        <div class="photo-frame">
+                            <img src="/img/b.jpg" alt="Petualangan di Pantai">
+                        </div>
+                    </div>
+                    <div class="memory-text">
+                        <h3>Our first date</h3>
+                        <p>Kalo ini, ini pertama kali kita date, aaaaaaaaaaaaaaaaaaaaaaa, our first date, dulu gatau kenapaa but tiba tiba di discord aku ngajakin main 
+                            hehehehehheheh, trus kamunya juga mau mau aja lagi wkwkwkkwkwk, trus pas kita fisrt date, pulang sekolah abis gelar karya p5 kita makan di hotways, first time ngeliat dira makan 
+                            wkkkwkkwkw, trus abis itu selesai makan jam 3 trus kita main game deh di kosmik, dira cupu banget mainya wkwkkw lucuu, jadi aku juga bantuin main nya dira hehehehe .</p>
+                        <p>trus pas mau pulang aku ninggalin diraaa, noo, maaffff, aku gatauu kalo diraa ternyata dira gabisa di tinggal hehehehhe maaf yahhh</p>
+                        <span class="memory-date">22 november 2024</span>
+                    </div>
+                </div>
+                
+                <!-- Kenangan 3 -->
+                <div class="memory-item">
+                    <div class="memory-image">
+                        <div class="photo-frame">
+                            <img src="/img/c.jpg" alt="Piknik di Taman">
+                        </div>
+                    </div>
+                    <div class="memory-text">
+                        <h3>Aksen smaga with dira</h3>
+                        <p>our first night date, omg aaaaaaa, pas ini sebenernya awalnya aku terpaksa harus dateng sendirian tapi aku ngajak dira ikut teruss
+                            biar ikut hehehehhehe, soalnya ga seru kalo ga ada diraa heheheheh maaf yahh.</p>
+                        <p>trus pas hari itu dan besoknya jadi lebih banyak orang yang tau tentang hubungan kita wkwkwkkw, trus pas itu juga first time Aku
+                            gandengan tangan sama diraa aaaaaaaaaaaaaaa, kwkwkwkwkkwk.</p>
+                        <span class="memory-date">16 desember 2024</span>
+                    </div>
+                </div>
+                
+                <!-- Kenangan 4 -->
+                <div class="memory-item">
+                    <div class="memory-image">
+                        <div class="photo-frame">
+                            <img src="/img/d.jpg" alt="Festival Lampu">
+                        </div>
+                    </div>
+                    <div class="memory-text">
+                        <h3>Valentine with diraa</h3>
+                        <p>thisss adalah my first valentine, and my first valentine sama diraaa aaaaaaaaaaaaaaaaaa kwkwkw, aku kasi dira coklat sama sesuatu hehehehehheheh
+                            dira suka ga yahhh, kalo dari pengetahuan ku sih dira suka wkwkwk
+                        </p>
+
+                        <span class="memory-date">14 februari 2024</span>
+                    </div>
+                </div>
+                
+                
+    
+    <section class="message" id="message">
+        <div class="container">
+            <div class="message-box fade-in">
+                <h2>For my lovee diraa</h2>
+                <p>Di hari spesialmu ini, aku mau bilang betapa berartinya kamu buatku. Tiap pagi, kamu alasan aku tersenyum, dan tiap malam, kamu bintang paling indah yang nyinarin langitku.</p>
+                <p>i love caramu ketawa pas bahagia, kasih sayang mu ke orang lain, dan kelembutan hati dira sama akuu. dira adalaj puisi terindah yang pernah kutemui, dan aku bersyukur bisa menjadi bagian dari kisah hidupmu.</p>
+                <p>Di ulang tahun dira ini, semoga semua impian dan harapanmu terwujud. Aku janji akan selalu ada di sampingmu, nemenin dira terus dalam setiap langkah , pas suka atau duka.</p>
+                <p class="signature">Dengan cinta yang tak terhingga,<br>farhan</p>
+                <button id="openSurprise" class="btn" style="color: #333; border-color: #333; margin-top: 20px;">Lihat ini </button>
+            </div>
+        </div>
+    </section>
+    
+   
+    <div class="surprise" id="surprise">
+        <div class="surprise-content">
+            <span class="close-surprise" id="closeSurprise">&times;</span>
+            <h2>kejutan Spesial</h2>
+            <p>dira, aku sudah menyiapkan kejutan yang spesial buat kamu malam ini. aku membuat website ini dari sebelum januari 2025 wkwkwk aku cuman nyicil nyicil .</p>
+            <p>semoga dira sukaa yahh, walaupun biasa aja sii hehehheheheh, intinya, makasi diraaa udah jadi cewe kuuu and last happy birthday diraa .</p>
+            <p>Dengan cinta yang mendalam dan serius,</p>
+            <p>farhan</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Dibuat dengan <span class="heart">❤</span> buat diraa</p>
+        <p>Happy birthday, my lovely girl</p>
+    </footer>
+    
+    <script>
+        // Membuat efek fade-in saat scroll
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        // Membuat efek untuk memory items
+        function checkMemoryItems() {
+            const memoryItems = document.querySelectorAll('.memory-item');
+            memoryItems.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        // Jalankan fungsi saat halaman dimuat
+        window.addEventListener('load', function() {
+            checkFade();
+            checkMemoryItems();
+        });
+        
+        // Jalankan fungsi saat scroll
+        window.addEventListener('scroll', function() {
+            checkFade();
+            checkMemoryItems();
+        });
+        
+        // Fungsi untuk membuka kejutan
+        document.getElementById('openSurprise').addEventListener('click', function() {
+            document.getElementById('surprise').style.display = 'flex';
+        });
+        
+        // Fungsi untuk menutup kejutan
+        document.getElementById('closeSurprise').addEventListener('click', function() {
+            document.getElementById('surprise').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
